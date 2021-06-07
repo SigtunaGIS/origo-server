@@ -1,4 +1,5 @@
 var conf = require('../conf/config');
+var objectifier = require('../lib/utils/objectifier');
 var request = require('request');
 var rp = require('request-promise');
 const url = require('url');
@@ -15,10 +16,10 @@ const lmBuilding = async (req, res) => {
     configOptions = Object.assign({}, conf[proxyUrl]);
     scope = configOptions.scope;
 
-    // Get a token from LM
+    //Get a token from LM
     await getTokenAsyncCall(configOptions.consumer_key, configOptions.consumer_secret, configOptions.scope);
 
-    // Do a POST with all the IDs from free search to get the complete objects with geometry
+    //Do a POST with all the IDs from free search to get the complete objects with geometry
     await doGetAsyncCall(req, res, configOptions, proxyUrl);
 
   }
@@ -64,15 +65,20 @@ async function getTokenAsyncCall(consumer_key, consumer_secret, scope) {
 }
 
 async function doGetAsyncCall(req, res, configOptions, proxyUrl) {
+
   // Use either byggnad objektidentitet or fastighet objektidentitet
+  var searchUrl = req.url;
+  var searchMethod = searchUrl.includes("referens");
+
   var options = {};
-  var id;;
-  var searchArray = req.url.split('/');
+  //var id;;
+  //var searchArray = req.url.split('/');
   var objektList = [];
 
-  if(decodeURI(searchArray[3]) === 'referens'){
+  if(searchMethod){
     // Fastighet objektidentitet
-    id = decodeURI(searchArray[5]);
+    //id = decodeURI(searchArray[4]);
+    var id = objectifier.get('query.registerenhet', req) || '';
     var options1 = {
         url: encodeURI(configOptions.url + '/referens/registerenhet/' + id + '?includeData=total'),
         method: 'GET',
@@ -110,7 +116,8 @@ async function doGetAsyncCall(req, res, configOptions, proxyUrl) {
 
   } else {
     // Byggnad objektidentitet
-    id = decodeURI(searchArray[3]);
+    //id = decodeURI(searchArray[3]);
+    var id = objectifier.get('query.uuid', req) || '';
     objektList.push(id)
 
     options = {

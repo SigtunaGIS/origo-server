@@ -48,7 +48,7 @@ router.all('/iotproxy/*', iotProxy);
 router.all('/overpass/*', overpass);
 router.all('/tvapi/*', tvApi);
 router.all('/converttogeojson/*', convertToGeojson);
-router.all('/lm/building/*', lmBuilding);
+router.all('/lm/building', lmBuilding);
 
 
 module.exports = router;
