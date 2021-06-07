@@ -68,7 +68,7 @@ async function doGetAsyncCall(req, res, configOptions, proxyUrl) {
 
   // Use either byggnad objektidentitet or fastighet objektidentitet
   var searchUrl = req.url;
-  var searchMethod = searchUrl.includes("referens");
+  var searchMethod = searchUrl.includes("registerenhet");
 
   var options = {};
   //var id;;
