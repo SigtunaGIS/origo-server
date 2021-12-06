@@ -21,6 +21,8 @@ var iotProxy = require('../handlers/iotproxy');
 var overpass = require('../handlers/overpass');
 var tvApi = require('../handlers/tvapi');
 var convertToGeojson = require('../handlers/converttogeojson');
+var auth = require('../handlers/auth');
+var clients = require('../handlers/clients');
 var lmBuilding = require('../handlers/lmbuilding');
 
 /* GET start page. */
@@ -48,7 +50,8 @@ router.all('/iotproxy/*', iotProxy);
 router.all('/overpass/*', overpass);
 router.all('/tvapi/*', tvApi);
 router.all('/converttogeojson/*', convertToGeojson);
+router.use('/auth', auth);
+router.use('/clients', clients);
 router.all('/lm/building', lmBuilding);
-
 
 module.exports = router;
