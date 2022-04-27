@@ -1,5 +1,6 @@
 var conf = require('../conf/config');
 var objectifier = require('../lib/utils/objectifier');
+var sortBy = require('../lib/utils/sortby');
 var request = require('request');
 var rp = require('request-promise');
 const url = require('url');
@@ -155,6 +156,8 @@ function getObjektArr(options) {
 function getBuildingInformation(req, res, options, objektList, fid) {
   rp(options)
   .then(function (parsedBody) {
+    let feat = parsedBody.features;
+    feat.sortBy('properties.byggnadsattribut.husnummer');
     res.render('lmbuilding', parsedBody);
   })
   .catch(function (err) {

@@ -1,9 +1,9 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-4">
-      <!-- <div class="page-header">
-          <h1>Byggnad Direkt</h1>
-      </div> -->
+      <div class="page-header">
+          <h2>Byggnader på fastighet {{{features.[0].properties.liggerPa.registerenhetsreferens.beteckning}}}</h2>
+      </div>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Byggnadsinformation</h3>
@@ -17,7 +17,11 @@
                         {{#if properties.byggnadsnamn.[0].namn}}
                           Byggnadsnamn: {{properties.byggnadsnamn.[0].namn}}<br>
                         {{/if}}
-                        {{#if properties.byggnadsandamal.[0].typ}}
+                        {{#if (eq properties.byggnadsandamal.[0].typ "Samhallsfunktion") }}
+                          Byggnadsändamål: Samhällsfunktion<br>
+                        {{else if (eq properties.byggnadsandamal.[0].typ "OvrigByggnad") }}
+                          Byggnadsändamål: Övrig byggnad<br>
+                        {{else}}
                           Byggnadsändamål: {{properties.byggnadsandamal.[0].typ}}<br>
                         {{/if}}
                         {{#if properties.byggnadsandamal.[0].andamal}}

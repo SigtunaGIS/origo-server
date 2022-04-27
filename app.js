@@ -1,7 +1,8 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-var cors = require('cors')
+var cors = require('cors');
+const rateLimit = require('express-rate-limit');
 
 var routes = require('./routes/index');
 var mapStateRouter = require('./routes/mapstate');
@@ -9,6 +10,16 @@ var errors = require('./routes/errors');
 var conf = require('./conf/config');
 
 var app = express();
+
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000, // 15 minutes
+	max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+})
+
+// apply rate limiter to all requests
+app.use(limiter);
 
 var server = app.listen(3001, function () {
   var host = server.address().address
@@ -21,7 +32,16 @@ var server = app.listen(3001, function () {
 process.chdir(__dirname);
 
 var handlebars = require('express-handlebars')
-    .create({defaultLayout: 'main'});
+    .create({ defaultLayout: 'main', helpers: {
+      eq: function (v1, v2) { return v1 === v2; },
+      ne: function (v1, v2) { return v1 !== v2; },
+      lt: function (v1, v2) { return v1 < v2; },
+      gt: function (v1, v2) { return v1 > v2; },
+      lte: function (v1, v2) { return v1 <= v2; },
+      gte: function (v1, v2) { return v1 >= v2; },
+      and: function () { return Array.prototype.every.call(arguments, Boolean); },
+      or: function () { return Array.prototype.slice.call(arguments, 0, -1).some(Boolean); }
+    }});
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
