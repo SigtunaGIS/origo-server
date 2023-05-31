@@ -40,11 +40,11 @@ module.exports = {
     }
   },
   lmbuilding: {
-    url: 'https://api.lantmateriet.se/distribution/produkter/byggnad/v2',
+    url: 'https://api.lantmateriet.se/distribution/produkter/byggnad/v3',
     url_token: "https://api.lantmateriet.se/token",
     consumer_key: 'xxxxx',
     consumer_secret: 'xxxxx',
-    scope: 'am_application_scope default'
+    scope: 'byggnad_direkt_v3_read'
   },
   lmelevation: {
     url: 'https://api.lantmateriet.se/distribution/produkter/hojd/v1/rest/api',
@@ -61,25 +61,25 @@ module.exports = {
     scope: 'am_application_scope default'
   },
   lmsearchestate: {
-    url: 'https://api.lantmateriet.se/distribution/produkter/registerbeteckning/v4/',
-    url_token: 'https://api.lantmateriet.se/token',
+    url: "https://api.lantmateriet.se/distribution/produkter/registerbeteckning/v5/",
+    url_token: "https://api.lantmateriet.se/token",
     consumer_key: 'xxxxx',
     consumer_secret: 'xxxxx',
-    scope: 'am_application_scope default'
+    scope: 'registerbeteckning_direkt_v5_read'
   },
   lmsearchaddress: {
-    url: 'https://api.lantmateriet.se/distribution/produkter/belagenhetsadress/v4.1/',
-    url_token: 'https://api.lantmateriet.se/token',
+    url: "https://api.lantmateriet.se/distribution/produkter/belagenhetsadress/v4.2",
+    url_token: "https://api.lantmateriet.se/token",
     consumer_key: 'xxxxx',
     consumer_secret: 'xxxxx',
-    scope: 'am_application_scope default'
+    scope: 'belagenhetsadress_direkt_v42_read'
   },
   lmgetestate: {
-    url: 'https://api.lantmateriet.se/distribution/produkter/fastighet/v2.1/',
-    url_token: 'https://api.lantmateriet.se/token',
+    url: "https://api.lantmateriet.se/distribution/produkter/fastighetsamfallighet/v3.1",
+    url_token: "https://api.lantmateriet.se/token",
     consumer_key: 'xxxxx',
     consumer_secret: 'xxxxx',
-    scope: 'am_application_scope default'
+    scope: 'fastighetochsamfallighet_direkt_v31_read'
   },
   cors: {
     origin: '*',
