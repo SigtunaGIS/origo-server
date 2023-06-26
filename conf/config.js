@@ -137,7 +137,10 @@ module.exports = {
   },
   auth: {
     openidIssuer: 'https://openid-provider/.well-known/openid-configuration',
-    redirect_uri: 'https://karta.xxx.se',
+    redirect_uris: {
+      my_client: 'https://karta.xxx.se',
+      my_other_client: 'https://remote.xxx.se'
+    },
     http_timeout: 10000,
     client_id: 'xxxxx',
     client_secret: 'xxxxx',
