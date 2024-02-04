@@ -9,13 +9,6 @@ module.exports = {
     consumer_secret: '',
     scope: 'inskrivning_direkt_v3_read'
   },
-  lmbuilding: {
-    url: 'https://api.lantmateriet.se/distribution/produkter/byggnad/v2',
-    url_token: "https://api.lantmateriet.se/token",
-    consumer_key: '',
-    consumer_secret: '',
-    scope: 'am_application_scope default'
-  },
   getAkt: {
     url_token: 'https://api.lantmateriet.se/token',
     consumer_key: '',
