@@ -160,7 +160,7 @@ async function doGetAsyncCall(req, res, configOptions, token) {
 
       // Setup the search call and wait for result
       const options = {
-          url: encodeURI(configOptions.url + '/hojd/3006/' + xcoord + '/' + ycoord + '/'),
+          url: encodeURI(configOptions.url + '/hojd/3006/' + xcoord + '/' + ycoord),
           method: 'GET',
           headers: {
             'content-type': 'application/json',
